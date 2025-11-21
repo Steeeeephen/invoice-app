@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
-            $table->string('invoice_number');
+            $table->string('invoice_number')->nullable();
             // foreignId method creates an unsigned bigint equivalent column and constrained() determines the table and column that is referenced.
             // So based on 'customer_id' it knows that we're looking for the 'id' column in the 'customers' table.
             // constrained() also creates the foreign key constraint which enforces referential
