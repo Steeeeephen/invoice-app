@@ -18,9 +18,11 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'email',
         'password',
+        'role'
     ];
 
     /**
@@ -45,4 +47,27 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    // Role helpers
+    public function isSuperAdmin(): bool
+    {
+        return $this->role === 'super_admin';
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+
+    }
+
+    public function isAnyAdmin(): bool
+    {
+        return in_array($this->role,['super_admin','admin']);
+    }
+
+    public function isClient(): bool
+    {
+        return $this->role === 'client';
+    }
+
 }
