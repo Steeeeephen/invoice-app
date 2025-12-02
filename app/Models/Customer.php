@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use SebastianBergmann\CodeCoverage\Report\Xml\Project;
 
+/**
+ * @property mixed $Customer
+ */
 class Customer extends Model
 {
     use HasFactory;
