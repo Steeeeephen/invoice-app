@@ -52,7 +52,7 @@ class CustomerController extends Controller
     {
         // Load related invoices and projects if not eager-loaded globally
         // More info on eager loading https://laravel.com/docs/12.x/eloquent-relationships#eager-loading
-        $customer->Customer::with(['invoices', 'projects']);
+        $customer->load(['invoices', 'projects']);
         return view('customers.show', compact('customer'));
     }
 
