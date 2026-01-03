@@ -20,6 +20,7 @@ class Invoice extends Model
 
     protected static function booted()
     {
+        // Note... This would not be ideal for production as there is a brief window where the invoice number is null. Changing this is on the todo list.
         static::created(function ($invoice) {
             // Use 'created' instead of 'creating' so the ID exists
             if (empty($invoice->invoice_number)) {

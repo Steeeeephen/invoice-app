@@ -1,7 +1,10 @@
 <x-layout>
 
+    <main class="flex flex-col container mx-auto px-6 py-6">
+
+
     <div class="flex items-center mb-4 justify-between">
-        <h1 class="text-2xl font-bold mb-4  ">Customer List</h1>
+        <h1 class="text-2xl font-bold mb-4">Customer List</h1>
         <a href="{{ route('customers.create') }}"
            class="bg-blue-600 text-white text-sm px-4 py-2 rounded hover:bg-blue-700 mr-6">
             + Create Customer
@@ -35,7 +38,7 @@
         </tbody>
     </table>
 
-
+    </main>
 
 
 </x-layout>

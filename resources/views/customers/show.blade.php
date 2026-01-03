@@ -4,7 +4,7 @@
         Customer Details
     </h1>
 
-    <section class="min-w-full bg-gray-100 my-6 p-3 shadow-md rounded-md overflow-hidden">
+    <section class="min-w-full bg-gray-100 my-6 p-3 shadow-md rounded-md overflow-hidden flex justify-between">
         <div>
             <h2 class="text-xl font-semibold">{{ $customer->first_name }} {{ $customer->last_name }}</h2>
             <p>
@@ -16,14 +16,25 @@
 
             </p>
         </div>
+
+        <div>
+            <a
+                href="{{ route('customers.edit', $customer->id) }}"
+                class="bg-green-400 font-bold rounded p-2 text-zinc-50 hover:bg-green-600 cursor-pointer"
+            >
+                 Edit
+            </a>
+        </div>
     </section>
+
+
 
     <h1 class="text-2xl font-bold">
         Customer Invoices
     </h1>
 
         @if($customer->invoices->count())
-            <table class="min-w-full bg-gray-100  rounded-md overflow-hidden shadow-md shadow-zinc-500/50">
+            <table class="min-w-full bg-gray-100 my-6 p-3 rounded-md overflow-hidden shadow-md shadow-zinc-500/50">
                 <thead class="bg-gray-200  text-left text-sm uppercase tracking-wider text-gray-800 ">
                 <tr>
                     <th class="px-6 py-3" >Invoice #</th>
