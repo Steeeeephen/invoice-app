@@ -16,6 +16,7 @@
             ICM App
         </a>
 
+        @auth
         {{--      Nav Links      --}}
         <ul class="flex flex-row gap-6">
             <li>
@@ -41,17 +42,19 @@
         </ul>
 
         {{--      Account Actions      --}}
-        <ul class="flex flex-row">
-            <li>
-{{--                <a href="#" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium">--}}
-{{--                    Log In--}}
-{{--                </a>--}}
 
+            <ul class="flex flex-row">
+                <li>
+                    <form action="/logout" method="POST">
+                        @csrf
+                        <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium cursor-pointer">
+                            Log Out
+                        </button>
+                    </form>
+                </li>
+            </ul>
+        @endauth
 
-
-
-            </li>
-        </ul>
 
     </div>
 </nav>
