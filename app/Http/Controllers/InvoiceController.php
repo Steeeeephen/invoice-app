@@ -43,7 +43,7 @@ class InvoiceController extends Controller
     public function store(Request $request)
     {
         $incomingFields = $request->validate([
-            'amount' => 'required|numeric|min:0',
+            'amount_due' => 'required|numeric|min:0',
             'description' => 'nullable|string|max:1000',
             'customer_id' => 'required|exists:customers,id',
         ]);
@@ -76,7 +76,7 @@ class InvoiceController extends Controller
     public function update(Invoice $invoice, Request $request)
     {
         $incomingFields = $request->validate([
-            'amount' => 'required|numeric|min:0',
+            'amount_due' => 'required|numeric|min:0',
             'description' => 'nullable|string|max:1000',
         ]);
 
