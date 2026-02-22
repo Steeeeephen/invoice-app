@@ -13,7 +13,12 @@ Route::post('/logout', [HomeController::class, 'logout'])->name('logout');
 
 
 
-Route::resource('customers', CustomerController::class);
-Route::resource('invoices', InvoiceController::class);
-Route::resource('projects', ProjectController::class);
+Route::middleware(['admin'])->group(function () {
+    Route::resource('customers', CustomerController::class);
+    Route::resource('invoices', InvoiceController::class);
+    Route::resource('projects', ProjectController::class);
+});
+
+
+
 Route::resource('users', UserController::class);
