@@ -1,44 +1,32 @@
 <x-layout>
 
-    <div class="flex items-center mb-4 justify-between">
+    <div class="flex flex-col container mx-auto px-6 py-6">
         <h1 class="text-2xl font-bold mb-4  ">Invoice List</h1>
-    </div>
-
-    <table class="min-w-full bg-gray-100  shadow-md rounded-md overflow-hidden">
-        <thead class="bg-gray-200  text-left text-sm uppercase tracking-wider text-gray-800 ">
-        <tr>
-            <th class="px-6 py-3">Invoice Number</th>
-            <th class="px-6 py-3">Customer</th>
-            <th class="px-6 py-3">Company</th>
-            <th class="px-6 py-3">Due Date</th>
-            {{--            <th class="px-6 py-3">State</th>--}}
-        </tr>
-        </thead>
-        <tbody class="text-sm text-gray-900 ">
-        @foreach ($invoices as $invoice)
-            <tr class="border-t border-gray-300  hover:bg-green-100  transition-colors">
-
-                <td class="px-6 py-4">
-                    <a href="{{ route('invoices.show', $invoice->id) }}"
-                       class="text-blue-600 hover:underline dark:text-blue-400">
-                        {{ $invoice->invoice_number }}
-                    </a>
-                </td>
-
-                <td class="px-6 py-4">{{ $invoice->customer->first_name }} {{ $invoice->customer->last_name }}</td>
-                <td class="px-6 py-4">{{ $invoice->customer->company_name }}</td>
-                <td class="px-6 py-4">{{ $invoice->due_date }}</td>
 
 
-
-
-
+        <table
+            class="min-w-full bg-slate-800 border border-slate-700 my-6 rounded-md overflow-hidden shadow-md shadow-black/40">
+            <thead class="bg-slate-700 text-left text-sm uppercase tracking-wider text-gray-400">
+            <tr>
+                <th class="px-6 py-3">Invoice Number</th>
+                <th class="px-6 py-3">Customer</th>
+                <th class="px-6 py-3">Company</th>
+                <th class="px-6 py-3">Due Date</th>
+                {{--            <th class="px-6 py-3">State</th>--}}
             </tr>
-        @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody class="divide-y divide-slate-700">
+            @foreach ($invoices as $invoice)
+                <tr class="hover:bg-slate-700/50 transition-colors cursor-pointer" onclick="window.location='{{route('invoices.show', $invoice)}}'">
+                    <td class="px-6 py-4">{{ $invoice->invoice_number }}</td>
+                    <td class="px-6 py-4">{{ $invoice->customer->first_name }} {{ $invoice->customer->last_name }}</td>
+                    <td class="px-6 py-4">{{ $invoice->customer->company_name }}</td>
+                    <td class="px-6 py-4">{{ $invoice->due_date }}</td>
 
-
+            @endforeach
+            </tbody>
+        </table>
+    </div>
 
 
 </x-layout>
