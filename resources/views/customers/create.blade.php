@@ -1,8 +1,14 @@
 <x-layout>
-    <h1 class="text-2xl font-bold mb-4">Create a Customer</h1>
+    <div class="flex justify-center items-center flex-col">
+
     @include('customers._form', [
+        'title' => 'Create a Customer',
         'action' => route('customers.store'),
         'method' => 'POST',
         'buttonText' => 'Create Customer'
     ])
+
+    </div>
+
+
 </x-layout>
