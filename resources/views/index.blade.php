@@ -1,6 +1,5 @@
 <x-layout>
-    <main class="min-h-screen flex items-center justify-center bg-slate-900 px-4">
-
+    <div class="min-h-screen flex justify-center bg-slate-900 px-4">
         @guest
             <div class="w-full max-w-md">
                 <div class="text-center mb-8">
@@ -59,5 +58,5 @@
             </div>
         @endauth
 
-    </main>
+    </div>
 </x-layout>

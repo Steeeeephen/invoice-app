@@ -18,7 +18,7 @@
         @auth
             <ul class="flex gap-6">
                 <li>
-                    <a href="{{ route('users.index') }}" class="text-slate-300 hover:text-white font-medium transition-colors">
+                    <a href="#" class="text-slate-300 hover:text-white font-medium transition-colors">
                         Users
                     </a>
                 </li>
@@ -33,7 +33,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('projects.index') }}" class="text-slate-300 hover:text-white font-medium transition-colors">
+                    <a href="#" class="text-slate-300 hover:text-white font-medium transition-colors">
                         Projects
                     </a>
                 </li>
