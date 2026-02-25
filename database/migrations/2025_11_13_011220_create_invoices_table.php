@@ -22,10 +22,11 @@ return new class extends Migration
             $table->foreignId('customer_id')->constrained()->cascadeOnDelete();
             $table->foreignId('project_id')->nullable()->constrained()->nullOnDelete(); //This means an invoice may or may not have a project attached. If it does, it's constrained to that specific project. If that project is deleted, the project_id on the invoice will be set to NULL, preserving the invoice.
             $table->text('description');
+            $table->decimal('invoice_amount', 10, 2);
             $table->decimal('amount_due', 10, 2);
             $table->date('due_date')->nullable();
-            $table->date('paid_at')->nullable();
-            $table->enum('status', ['draft', 'sent', 'paid', 'cancelled'])->default('draft');
+            $table->timestamp('paid_at')->nullable();
+            $table->enum('status', ['draft', 'sent', 'paid', 'partially_paid', 'overdue', 'cancelled'])->default('draft');
             $table->timestamps();
         });
     }

@@ -13,14 +13,34 @@ class InvoiceFactory extends Factory
 
     public function definition(): array
     {
+        $invoiceAmount = $this->faker->randomFloat(2, 100, 5000);
+
+        // Pick a scenario at random to get a good spread of statuses
+        $scenario = $this->faker->randomElement(['paid', 'partial', 'unpaid', 'cancelled']);
+
+        $amountDue = match($scenario) {
+            'paid'      => 0,
+            'partial'   => $this->faker->randomFloat(2, 1, $invoiceAmount - 0.01),
+            'unpaid'    => $invoiceAmount,
+            'cancelled' => 0,
+        };
+
+        $status = match($scenario) {
+            'paid'      => 'paid',
+            'partial'   => 'partially_paid',
+            'unpaid'    => $this->faker->randomElement(['draft', 'sent', 'overdue']),
+            'cancelled' => 'cancelled',
+        };
+
         return [
-            'description' => $this->faker->sentence(),
-            'amount_due' => $this->faker->randomFloat(2, 100, 2000),
-            'due_date' => $this->faker->date(),
-            'status' => $this->faker->randomElement(['draft', 'sent', 'paid', 'cancelled']),
-            // Setting the customer_id is self-explanatory, but we're taking the entire Customer table, randomizing it, then selecting the first row and using the id.
-            'customer_id' => Customer::inRandomOrder()->first()->id,
-            'project_id' => Project::inRandomOrder()->first()->id,
+            'description'    => $this->faker->sentence(),
+            'invoice_amount' => $invoiceAmount,
+            'amount_due'     => $amountDue,
+            'due_date'       => $this->faker->date(),
+            'paid_at'        => $status === 'paid' ? $this->faker->date() : null,
+            'status'         => $status,
+            'customer_id'    => Customer::inRandomOrder()->first()->id,
+            'project_id'     => Project::inRandomOrder()->first()->id,
         ];
     }
 }
