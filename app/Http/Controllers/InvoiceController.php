@@ -43,9 +43,10 @@ class InvoiceController extends Controller
     public function store(Request $request)
     {
         $incomingFields = $request->validate([
-            'amount_due' => 'required|numeric|min:0',
+            'invoice_amount' => 'required|numeric|min:0',
             'description' => 'nullable|string|max:1000',
             'customer_id' => 'required|exists:customers,id',
+            'due_date' => 'nullable|date',
         ]);
 
         $invoice = Invoice::create($incomingFields);
