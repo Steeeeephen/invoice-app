@@ -5,6 +5,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Invoice extends Model
 {
@@ -19,7 +20,7 @@ class Invoice extends Model
         'status',
     ];
 
-    protected static function booted()
+    protected static function booted(): void
     {
         // Set amount_due to invoice_amount if not explicitly provided
         static::creating(function ($invoice) {
@@ -59,13 +60,18 @@ class Invoice extends Model
         });
     }
 
+    // Helper function for checking draft status when attempting to edit.
+    public function isDraft(): bool {
+        return $this->status === 'draft';
+    }
 
-    public function customer()
+
+    public function customer(): BelongsTo
     {
         return $this->belongsTo(Customer::class);
     }
 
-    public function project()
+    public function project(): BelongsTo
     {
         return $this->belongsTo(Project::class);
     }
