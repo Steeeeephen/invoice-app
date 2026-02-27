@@ -6,6 +6,9 @@ use App\Models\Customer;
 use App\Models\Invoice;
 use Illuminate\Http\Request;
 
+/**
+ * @method authorize(string $string, Invoice $invoice)
+ */
 class InvoiceController extends Controller
 {
     /**
@@ -67,6 +70,7 @@ class InvoiceController extends Controller
      */
     public function edit(Invoice $invoice)
     {
+        $this->authorize('update', $invoice);
         $invoice->load(['customer', 'project']);
         return view('invoices.edit', compact('invoice'));
     }
@@ -76,15 +80,26 @@ class InvoiceController extends Controller
      */
     public function update(Invoice $invoice, Request $request)
     {
+        $this->authorize('update', $invoice);
+
         $incomingFields = $request->validate([
-            'amount_due' => 'required|numeric|min:0',
+            'invoice_amount' => 'required|numeric|min:0',
             'description' => 'nullable|string|max:1000',
         ]);
 
+
+        $incomingFields['amount_due'] = $incomingFields['invoice_amount'];
+
         $invoice->update($incomingFields);
+
         return redirect()
             ->route('invoices.show', $invoice)
             ->with('success', 'Invoice updated successfully.');
+    }
+
+    public function send(Invoice $invoice) {
+        $invoice->update(['status' => 'sent']);
+        return redirect()->route('invoices.show', $invoice)->with('success', 'Invoice sent.');
     }
 
     /**
