@@ -42,7 +42,10 @@
                     Customer Invoices
                 </h2>
                 <a
-                    href="#"
+                    {{-- Notice the addition in the route below.
+                    The invoices.create route needs the customer query in the url.
+                    The associative array I added generates that query string automatically--}}
+                    href="{{ route('invoices.create', ['customer' => $customer->id]) }}"
                     class="bg-violet-900 font-bold rounded p-2 text-white hover:bg-violet-700 cursor-pointer"
                 >
                     Create New Invoice
