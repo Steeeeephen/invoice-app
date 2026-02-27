@@ -1,5 +1,5 @@
 <h1 class="text-2xl font-bold mb-6 text-gray-100">
-    {{ $operation }} {{ $customer->first_name }} {{ $customer->last_name }}
+    {{ $title }}
 </h1>
 
 <form action="{{ $action }}" method="POST" class="w-1/2">
@@ -20,6 +20,7 @@
             id="invoice_amount"
             name="invoice_amount"
             class="w-full rounded px-3 py-2 bg-slate-700 border border-slate-600 text-gray-100 placeholder-gray-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+            value="{{ $invoice->invoice_amount ?? '' }}"
         />
     </div>
 
@@ -35,6 +36,7 @@
             id="description"
             name="description"
             class="w-full rounded px-3 py-2 bg-slate-700 border border-slate-600 text-gray-100 placeholder-gray-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+            value="{{ $invoice->description ?? '' }}"
         />
     </div>
 
@@ -50,6 +52,7 @@
             name="due_date"
             id="due_date"
             class="rounded px-3 py-2 bg-slate-700 border border-slate-600 text-gray-100 placeholder-gray-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+            value="{{ $invoice->due_date ?? '' }}"
         />
     </div>
 
