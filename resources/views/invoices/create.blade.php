@@ -3,11 +3,10 @@
         @include(
             "invoices._form",
             [
-                "title" => "Create an Invoice",
+                "title" => "Creating an Invoice for $customer->first_name $customer->last_name",
                 "action" => route("invoices.store"),
                 "method" => "POST",
                 "buttonText" => "Create Invoice",
-                "operation" => "Creating an Invoice for ",
             ]
         )
     </div>
