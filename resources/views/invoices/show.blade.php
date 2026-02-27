@@ -18,11 +18,11 @@
 
             @if ($invoice->status === "draft")
                 <form
-                    action="{{ route('invoices.send', $invoice) }}"
+                    action="{{ route("invoices.send", $invoice) }}"
                     method="POST"
                 >
                     @csrf
-                    @method('PATCH')
+                    @method("PATCH")
                     <button
                         class="bg-violet-900 font-bold rounded p-2 text-white hover:bg-violet-700 cursor-pointer"
                         type="submit"
@@ -30,31 +30,14 @@
                         SEND
                     </button>
                 </form>
-
             @endif
 
             <h2 class="text-2xl">
-                @php
-                    $statusClasses = match ($invoice->status) {
-                        "paid" => "bg-green-500/20 text-green-400 border border-green-500/30",
-                        "overdue" => "bg-red-500/20 text-red-400 border border-red-500/30",
-                        default => "bg-yellow-500/20 text-yellow-400 border border-yellow-500/30",
-                    };
-                @endphp
 
                 Status:
-                <span
-                    class="px-2 py-1 rounded-full font-semibold {{ $statusClasses }}"
-                >
-                    {{ ucfirst($invoice->status) }}
-                </span>
+                <x-invoice-status :status="$invoice->status"/>
             </h2>
         </div>
-
-        <h1 class="text-4xl">
-            Invoice amount: ${{ $invoice->invoice_amount }}
-        </h1>
-        <h2>Amount due: {{ $invoice->amount_due }}</h2>
 
         <section
             class="min-w-full bg-slate-800 border border-slate-700 my-6 p-4 shadow-md rounded-md overflow-hidden flex justify-between"
@@ -94,6 +77,22 @@
                     <br/>
                 </p>
             </div>
+        </section>
+
+        <section
+            class="min-w-full bg-slate-800 border border-slate-700 my-6 p-4 shadow-md rounded-md overflow-hidden "
+        >
+            <div class="flex justify-between">
+                <h1 class="text-4xl">
+                    Invoice total:
+                    ${{ number_format($invoice->invoice_amount, 2, ".", ",") }}
+                </h1>
+                <h1 class="text-4xl">
+                    Amount due:
+                    ${{ number_format($invoice->amount_due, 2, ".", ",") }}
+                </h1>
+            </div>
+
         </section>
 
         <section

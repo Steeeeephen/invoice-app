@@ -14,11 +14,12 @@
         </div>
 
 
-
-        <section class="min-w-full bg-slate-800 border border-slate-700 my-6 p-4 shadow-md rounded-md overflow-hidden flex justify-between">
+        <section
+            class="min-w-full bg-slate-800 border border-slate-700 my-6 p-4 shadow-md rounded-md overflow-hidden flex justify-between">
             <div>
                 <h3 class="text-lg font-semibold text-gray-400 uppercase tracking-wider mb-2">Contact Info</h3>
-                <a class="text-indigo-400 hover:text-indigo-300" href="mailto:{{ $customer->email }}">{{ $customer->email }}</a><br>
+                <a class="text-indigo-400 hover:text-indigo-300"
+                   href="mailto:{{ $customer->email }}">{{ $customer->email }}</a><br>
                 <span class="text-gray-300">{{ $customer->phone }}</span>
             </div>
 
@@ -31,8 +32,6 @@
                 </p>
             </div>
         </section>
-
-
 
 
         <section class="mt-10">
@@ -53,15 +52,17 @@
             </div>
 
             <div class="flex gap-5">
-                <h3 class="text-2xl">Open invoices: {{ $customer->invoices->whereIn('status', ['sent', 'partially_paid', 'overdue'])->count() }}</h3>
+                <h3 class="text-2xl">Open
+                    invoices: {{ $customer->invoices->whereIn('status', ['sent', 'partially_paid', 'overdue'])->count() }}</h3>
 
                 <h3 class="text-2xl">Total due: ${{ number_format($customer->invoices->sum('amount_due'), 2) }}</h3>
             </div>
 
 
-        @if($customer->invoices->count())
-            <table class="min-w-full bg-slate-800 border border-slate-700 my-6 rounded-md overflow-hidden shadow-md shadow-black/40">
-                <thead class="bg-slate-700 text-left text-sm uppercase tracking-wider text-gray-400">
+            @if($customer->invoices->count())
+                <table
+                    class="min-w-full bg-slate-800 border border-slate-700 my-6 rounded-md overflow-hidden shadow-md shadow-black/40">
+                    <thead class="bg-slate-700 text-left text-sm uppercase tracking-wider text-gray-400">
                     <tr>
                         <th class="px-6 py-3">Invoice #</th>
                         <th class="px-6 py-3">Description</th>
@@ -69,30 +70,22 @@
                         <th class="px-6 py-3">Status</th>
                         <th class="px-6 py-3">Due Date</th>
                     </tr>
-                </thead>
-                <tbody class="divide-y divide-slate-700">
-                @foreach($customer->invoices as $invoice)
-                    <tr class="hover:bg-slate-700/50 transition-colors cursor-pointer" onclick="window.location='{{ route('invoices.show', $invoice) }}'">
-                        <td class="px-6 py-4 text-indigo-400 font-medium">{{ $invoice->invoice_number }}</td>
-                        <td class="px-6 py-4 text-gray-300">{{ $invoice->description }}</td>
-                        <td class="px-6 py-4 text-gray-300">${{ number_format($invoice->amount_due, 2) }}</td>
-                        <td class="px-6 py-4">
-                            @php
-                                $statusClasses = match($invoice->status) {
-                                    'paid'    => 'bg-green-500/20 text-green-400 border border-green-500/30',
-                                    'overdue' => 'bg-red-500/20 text-red-400 border border-red-500/30',
-                                    default   => 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30',
-                                };
-                            @endphp
-                            <span class="px-2 py-1 rounded-full text-xs font-semibold {{ $statusClasses }}">
-                                    {{ ucfirst($invoice->status) }}
-                                </span>
-                        </td>
-                        <td class="px-6 py-4 text-gray-300">{{ \Carbon\Carbon::parse($invoice->due_date)->format('M j, Y') }}</td>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody class="divide-y divide-slate-700">
+                    @foreach($customer->invoices as $invoice)
+                        <tr class="hover:bg-slate-700/50 transition-colors cursor-pointer"
+                            onclick="window.location='{{ route('invoices.show', $invoice) }}'">
+                            <td class="px-6 py-4 text-indigo-400 font-medium">{{ $invoice->invoice_number }}</td>
+                            <td class="px-6 py-4 text-gray-300">{{ $invoice->description }}</td>
+                            <td class="px-6 py-4 text-gray-300">${{ number_format($invoice->amount_due, 2) }}</td>
+                            <td class="px-6 py-4">
+                                <x-invoice-status :status="$invoice->status"/>
+                            </td>
+                            <td class="px-6 py-4 text-gray-300">{{ \Carbon\Carbon::parse($invoice->due_date)->format('M j, Y') }}</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
             @endif
         </section>
 
