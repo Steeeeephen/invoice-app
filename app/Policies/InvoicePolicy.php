@@ -63,4 +63,8 @@ class InvoicePolicy
     {
         return false;
     }
+
+    public function send(User $user, Invoice $invoice): bool {
+        return $invoice->isDraft();
+    }
 }

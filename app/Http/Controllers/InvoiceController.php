@@ -98,6 +98,7 @@ class InvoiceController extends Controller
     }
 
     public function send(Invoice $invoice) {
+        $this->authorize('send', $invoice);
         $invoice->update(['status' => 'sent']);
         return redirect()->route('invoices.show', $invoice)->with('success', 'Invoice sent.');
     }
