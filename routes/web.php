@@ -13,14 +13,13 @@ Route::post('/logout', [HomeController::class, 'logout'])->name('logout');
 
 
 
-Route::middleware(['admin'])->group(function () {
+Route::middleware(['role:admin,super_admin'])->group(function () {
     Route::resource('customers', CustomerController::class);
     Route::resource('invoices', InvoiceController::class);
     Route::patch('/invoices/{invoice}/send', [InvoiceController::class, 'send'])->name('invoices.send');
     Route::resource('projects', ProjectController::class);
-
 });
 
 
 
-Route::resource('users', UserController::class);
+Route::resource('users', UserController::class)->middleware(['role:super_admin']);
