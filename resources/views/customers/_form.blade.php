@@ -48,6 +48,7 @@
     @endforeach
 
     <button
+        type="submit"
         class="bg-indigo-600 text-white text-sm mt-4 px-4 py-2 rounded hover:bg-indigo-500 cursor-pointer font-semibold"
     >
         {{ $buttonText }}
