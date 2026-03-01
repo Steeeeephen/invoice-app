@@ -17,18 +17,26 @@
 
         @auth
             <ul class="flex gap-6">
+
+                {{--        Conditionally rendering the 'User' link in the nav bar. This could also be done with @can or @role but this seems to work just fine.        --}}
+                @if(auth()->user()->role === 'super_admin')
+                    <li>
+                        <a href="{{ route('users.index') }}"
+                           class="text-slate-300 hover:text-white font-medium transition-colors">
+                            Users
+                        </a>
+                    </li>
+                @endif
+
                 <li>
-                    <a href="#" class="text-slate-300 hover:text-white font-medium transition-colors">
-                        Users
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('customers.index') }}" class="text-slate-300 hover:text-white font-medium transition-colors">
+                    <a href="{{ route('customers.index') }}"
+                       class="text-slate-300 hover:text-white font-medium transition-colors">
                         Customers
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('invoices.index') }}" class="text-slate-300 hover:text-white font-medium transition-colors">
+                    <a href="{{ route('invoices.index') }}"
+                       class="text-slate-300 hover:text-white font-medium transition-colors">
                         Invoices
                     </a>
                 </li>
@@ -43,7 +51,8 @@
                 <span class="text-sm text-slate-400">{{ Auth::user()->first_name }}</span>
                 <form action="/logout" method="POST">
                     @csrf
-                    <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-500 transition-colors text-sm font-medium cursor-pointer">
+                    <button
+                        class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-500 transition-colors text-sm font-medium cursor-pointer">
                         Log Out
                     </button>
                 </form>
@@ -64,7 +73,8 @@
 <div class="max-w-7xl mx-auto w-full px-6 mt-4 space-y-2">
     @foreach($flashTypes as $type => $config)
         @if(session($type))
-            <div class="flash-message {{ $config['bg'] }} border rounded-lg px-4 py-3 text-sm flex items-center gap-2 transition-opacity duration-500">
+            <div
+                class="flash-message {{ $config['bg'] }} border rounded-lg px-4 py-3 text-sm flex items-center gap-2 transition-opacity duration-500">
                 <span>{{ $config['icon'] }}</span>
                 <span>{{ session($type) }}</span>
             </div>
