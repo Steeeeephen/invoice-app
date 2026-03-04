@@ -1,5 +1,34 @@
 <x-layout>
 
+    {{--  This is the fixed modal for the delete confirmation  --}}
+    <div class="fixed w-full h-screen bg-black/80 top-0 left-0 flex justify-center items-center overflow-hidden hidden" id="delete-modal">
+        <div class="bg-slate-800 rounded h-1/4 p-2">
+            <h1 class="text-2xl ">Are you sure you want to delete this user?</h1>
+
+            <div>
+                <form action="" method="POST" id="delete-form">
+                @csrf
+                @method('DELETE')
+                    <button
+                        type="submit"
+                        class="bg-red-600 text-white text-sm px-4 py-2 rounded hover:bg-red-700 mr-6 cursor-pointer">
+                        Yes, Delete
+                    </button>
+
+
+                </form>
+
+                <button class="bg-blue-600 text-white text-sm px-4 py-2 rounded hover:bg-blue-700 mr-6 cursor-pointer" id="close-delete-modal">
+
+                    Cancel
+                </button>
+            </div>
+
+
+        </div>
+    </div>
+
+
     <div class="flex flex-col container mx-auto px-6 py-6">
         <section class="flex items-center mb-4 justify-between">
             <h1 class="text-2xl font-bold mb-4">Admin List</h1>
@@ -28,7 +57,7 @@
                     <td class="px-6 py-4">{{ $user->first_name }} {{ $user->last_name }}</td>
                     <td class="px-6 py-4">{{ $user->email }}</td>
                     <td class="px-6 py-4">{{ $user->role }}</td>
-                    <td class="px-6 py-4 text-right">
+                    <td class="px-6 py-4 text-right flex justify-end">
                         <a href="{{ route('users.edit', $user->id) }}">
                             <button
                                 class="bg-blue-600 text-white text-sm px-4 py-2 rounded hover:bg-blue-700 mr-6 cursor-pointer">
@@ -36,10 +65,14 @@
                             </button>
                         </a>
 
-                        <button
-                            class="bg-red-600 text-white text-sm px-4 py-2 rounded hover:bg-red-700 mr-6 cursor-pointer">
-                            Delete
-                        </button>
+
+                            <button
+                                data-user-id="{{ $user->id }}"
+                                class="delete-btn bg-red-600 text-white text-sm px-4 py-2 rounded hover:bg-red-700 mr-6 cursor-pointer">
+                                Delete
+                            </button>
+
+
                     </td>
 
 

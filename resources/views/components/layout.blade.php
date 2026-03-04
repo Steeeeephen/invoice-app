@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ICM App</title>
-    @vite('resources/css/app.css')
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-slate-900 text-gray-100 min-h-screen flex flex-col">
 
@@ -85,15 +85,6 @@
 <main class="flex-1">
     {{ $slot }}
 </main>
-
-<script>
-    document.querySelectorAll('.flash-message').forEach(flash => {
-        setTimeout(() => {
-            flash.style.opacity = '0';
-            setTimeout(() => flash.remove(), 500);
-        }, 3000);
-    });
-</script>
 
 </body>
 </html>
