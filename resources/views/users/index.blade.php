@@ -1,30 +1,27 @@
 <x-layout>
 
     {{--  This is the fixed modal for the delete confirmation  --}}
-    <div class="fixed w-full h-screen bg-black/80 top-0 left-0 flex justify-center items-center overflow-hidden hidden" id="delete-modal">
-        <div class="bg-slate-800 rounded h-1/4 p-2">
-            <h1 class="text-2xl ">Are you sure you want to delete this user?</h1>
-
+    <div
+        class="fixed w-full h-screen rounded-xl bg-black/80 top-0 left-0 flex justify-center items-center overflow-hidden hidden"
+        id="delete-modal">
+        <div class="bg-slate-800 rounded-xl h-1/4 p-2">
+            <h1 class="text-2xl">
+                Are you sure you want to delete this user?</h1>
             <div>
                 <form action="" method="POST" id="delete-form">
-                @csrf
-                @method('DELETE')
+                    @csrf
+                    @method('DELETE')
                     <button
                         type="submit"
                         class="bg-red-600 text-white text-sm px-4 py-2 rounded hover:bg-red-700 mr-6 cursor-pointer">
                         Yes, Delete
                     </button>
-
-
                 </form>
-
-                <button class="bg-blue-600 text-white text-sm px-4 py-2 rounded hover:bg-blue-700 mr-6 cursor-pointer" id="close-delete-modal">
-
+                <button class="bg-blue-600 text-white text-sm px-4 py-2 rounded hover:bg-blue-700 mr-6 cursor-pointer"
+                        id="close-delete-modal">
                     Cancel
                 </button>
             </div>
-
-
         </div>
     </div>
 
@@ -39,7 +36,7 @@
         </section>
 
         <table
-            class="min-w-full bg-slate-800 border border-slate-700 my-6 rounded-md overflow-hidden shadow-md shadow-black/40">
+            class="min-w-full bg-slate-800  my-6 rounded-md overflow-hidden shadow-md shadow-black/40">
             <thead class="bg-slate-700 text-left text-sm uppercase tracking-wider text-gray-400">
             <tr>
                 <th class="px-6 py-3">Name</th>
@@ -66,11 +63,11 @@
                         </a>
 
 
-                            <button
-                                data-user-id="{{ $user->id }}"
-                                class="delete-btn bg-red-600 text-white text-sm px-4 py-2 rounded hover:bg-red-700 mr-6 cursor-pointer">
-                                Delete
-                            </button>
+                        <button
+                            data-user-id="{{ $user->id }}"
+                            class="delete-btn bg-red-600 text-white text-sm px-4 py-2 rounded hover:bg-red-700 mr-6 cursor-pointer">
+                            Delete
+                        </button>
 
 
                     </td>

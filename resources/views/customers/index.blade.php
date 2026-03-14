@@ -10,8 +10,8 @@
         </section>
 
         <table
-            class="min-w-full bg-slate-800 border border-slate-700 my-6 rounded-md overflow-hidden shadow-md shadow-black/40">
-        <thead class="bg-slate-700 text-left text-sm uppercase tracking-wider text-gray-400">
+            class="min-w-full bg-slate-800   my-6 rounded-md overflow-hidden shadow-md shadow-black/40">
+            <thead class="bg-slate-700 text-left text-sm uppercase tracking-wider text-gray-400">
             <tr>
                 <th class="px-6 py-3">Name</th>
                 <th class="px-6 py-3">Email</th>
@@ -22,7 +22,8 @@
             </thead>
             <tbody class="divide-y divide-slate-700">
             @foreach ($customers as $customer)
-                <tr class="hover:bg-slate-700/50 transition-colors cursor-pointer" onclick="window.location='{{ route('customers.show', $customer) }}'">
+                <tr class="hover:bg-slate-700/50 transition-colors cursor-pointer"
+                    onclick="window.location='{{ route('customers.show', $customer) }}'">
                     <td class="px-6 py-4">{{ $customer->first_name }} {{ $customer->last_name }}</td>
                     <td class="px-6 py-4">{{ $customer->email }}</td>
                     <td class="px-6 py-4">{{ $customer->company_name ?? '—' }}</td>
