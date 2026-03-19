@@ -34,6 +34,13 @@
                     </form>
                 @endcan
 
+                <a href="{{ route('invoices.download', $invoice->id) }}"
+                   class="text-3xl"
+                >
+                    Download
+                </a>
+
+
                 <h2 class="text-2xl">
                     Status:
                     <x-invoice-status :status="$invoice->status"/>
@@ -64,8 +71,8 @@
                     </a>
                     <br/>
                     <span class="text-gray-300">
-                    {{ $invoice->customer->phone }}
-                </span>
+                        {{ $invoice->customer->phone }}
+                    </span>
                 </div>
 
                 <div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use App\Models\Invoice;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 /**
@@ -29,7 +30,7 @@ class InvoiceController extends Controller
         $customerId = $request->get('customer');
 
         // Find the Customer model by ID or throw a 404 if not found
-        // This ensures we don't allow invoice creation for a non-existent customer
+        // This ensures I don't allow invoice creation for a non-existent customer
         $customer = Customer::findOrFail($customerId);
 
         // Pass the customer and a new empty Invoice instance to the view
@@ -63,6 +64,13 @@ class InvoiceController extends Controller
     {
         $invoice->load(['customer', 'project']);
         return view('invoices.show', compact('invoice'));
+    }
+
+    public function download(Invoice $invoice)
+    {
+        $invoice->load(['customer', 'project']);
+        $pdf = Pdf::loadView('pdf.invoice', compact('invoice'));
+        return $pdf->download($invoice->invoice_number . '.pdf');
     }
 
     /**
