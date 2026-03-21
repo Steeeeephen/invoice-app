@@ -25,3 +25,4 @@ Route::middleware(['role:admin,super_admin'])->group(function () {
 Route::resource('users', UserController::class)->middleware(['role:super_admin']);
 
 Route::get('/download-invoice/{invoice}', [InvoiceController::class, 'download'])->name('invoices.download');
+

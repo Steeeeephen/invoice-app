@@ -100,6 +100,8 @@
         $roles = ["super_admin" => "Super Admin", "admin" => "Admin", "client" => "Client"];
     @endphp
 
+    @if(auth()->user()->role === 'super_admin')
+
     <div class="mb-4">
         <label
             for="role"
@@ -132,6 +134,8 @@
         </select>
         <x-input-error name="role"></x-input-error>
     </div>
+
+    @endif
 
     <button
         type="submit"
