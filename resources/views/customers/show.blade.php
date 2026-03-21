@@ -7,7 +7,7 @@
 
             <a
                 href="{{ route('customers.edit', $customer->id) }}"
-                class="bg-violet-900 font-bold rounded p-2 text-white hover:bg-violet-700 cursor-pointer"
+                class="bg-blue-600 font-bold rounded p-2 text-white hover:bg-blue-500 cursor-pointer"
             >
                 Edit Customer
             </a>
@@ -45,7 +45,7 @@
                     The invoices.create route needs the customer query in the url.
                     The associative array I added generates that query string automatically--}}
                     href="{{ route('invoices.create', ['customer' => $customer->id]) }}"
-                    class="bg-violet-900 font-bold rounded p-2 text-white hover:bg-violet-700 cursor-pointer"
+                    class="bg-blue-600 font-bold rounded p-2 text-white hover:bg-blue-500 cursor-pointer"
                 >
                     Create New Invoice
                 </a>

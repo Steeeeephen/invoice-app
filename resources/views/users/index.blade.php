@@ -4,10 +4,13 @@
     <div
         class="fixed w-full h-screen rounded-xl bg-black/80 top-0 left-0 flex justify-center items-center overflow-hidden hidden"
         id="delete-modal">
-        <div class="bg-slate-800 rounded-xl h-1/4 p-2">
+        <div class="bg-slate-800 rounded-xl h-1/4 p-5 flex flex-col justify-around">
             <h1 class="text-2xl">
-                Are you sure you want to delete this user?</h1>
-            <div>
+                Are you sure you want to delete this user?
+            </h1>
+
+
+            <div class="flex justify-center">
                 <form action="" method="POST" id="delete-form">
                     @csrf
                     @method('DELETE')
@@ -17,7 +20,8 @@
                         Yes, Delete
                     </button>
                 </form>
-                <button class="bg-blue-600 text-white text-sm px-4 py-2 rounded hover:bg-blue-700 mr-6 cursor-pointer"
+
+                <button class="bg-zinc-50 border-red-600 text-black text-sm px-4 py-2 rounded hover:bg-zinc-200 mr-6 cursor-pointer"
                         id="close-delete-modal">
                     Cancel
                 </button>
