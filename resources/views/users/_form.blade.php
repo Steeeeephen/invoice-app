@@ -100,7 +100,24 @@
         $roles = ["super_admin" => "Super Admin", "admin" => "Admin", "client" => "Client"];
     @endphp
 
-    @if(auth()->user()->role === 'super_admin')
+    @if($isOwnProfile)
+    {{--
+
+    The point of the $isOwnProfile check is that I don't want users to be able to change their own role, so if this evaluates
+    as true (this is passed from the controller and is true when the authenticated user's id matches the target user's id)
+    the user will only see their role, but won't be able to change it.
+
+    Another thing to keep in mind, this template will be used for both Super Admins who will edit other users,
+    and it will be used as a profile view, so users can edit their own info.
+
+    The way it is set up now, is that users (even Super Admins) cannot change their own role. Instead if a user is editing
+    their own profile, they will see their assigned role, but it won't be displayed as a select input.
+
+    --}}
+        <h2 class="text-2xl">
+            {{ $user->role }}
+        </h2>
+    @else
 
     <div class="mb-4">
         <label

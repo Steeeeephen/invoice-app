@@ -26,3 +26,5 @@ Route::resource('users', UserController::class)->middleware(['role:super_admin']
 
 Route::get('/download-invoice/{invoice}', [InvoiceController::class, 'download'])->name('invoices.download');
 
+Route::get('/profile', [UserController::class, 'editProfile'])->name('profile.edit');
+Route::put('/profile', [UserController::class, 'updateProfile'])->name('profile.update');

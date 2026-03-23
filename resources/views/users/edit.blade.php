@@ -3,7 +3,7 @@
         @include(
             "users._form",
             [
-                "action" => route("users.update", $user),
+                "action" => $formAction,
                 "method" => "PUT",
                 "buttonText" => "Update User",
                 "title" => "Editing User",

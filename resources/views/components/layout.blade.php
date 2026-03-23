@@ -48,7 +48,11 @@
             </ul>
 
             <div class="flex items-center gap-4">
-                <span class="text-sm text-slate-400">{{ Auth::user()->first_name }}</span>
+                <span class="text-sm text-slate-400">
+                    <a href="{{ route('profile.edit') }}">
+                        {{ Auth::user()->first_name }}
+                    </a>
+                </span>
                 <form action="/logout" method="POST">
                     @csrf
                     <button
