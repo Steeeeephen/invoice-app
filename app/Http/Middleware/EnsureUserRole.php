@@ -21,7 +21,7 @@ class EnsureUserRole
         // The middleware checks the users' role in the request, and if it is not in that array, it will do an abort 403
         // This can be seen again in the routes, where certain routes contain admin, super_admin, and some only contain super_admin.
         if(!in_array($request->user()->role, $roles)) {
-            abort(403);
+           return redirect('/')->with('error', 'You do not have permission to do that!');
         }
 
         return $next($request);
