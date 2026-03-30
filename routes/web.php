@@ -28,3 +28,7 @@ Route::get('/download-invoice/{invoice}', [InvoiceController::class, 'download']
 
 Route::get('/profile', [UserController::class, 'editProfile'])->name('profile.edit');
 Route::put('/profile', [UserController::class, 'updateProfile'])->name('profile.update');
+
+
+// This is just a test route I'm using to try some different eloquent filters for displaying invoices.
+Route::get('/invoices-test', [invoiceController::class, 'invoiceTest'])->name('invoices.test.index');

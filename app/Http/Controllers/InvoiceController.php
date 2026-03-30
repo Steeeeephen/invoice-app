@@ -118,4 +118,11 @@ class InvoiceController extends Controller
     {
         //
     }
+
+
+    // TEST INVOICE ROUTE
+    public function invoiceTest() {
+        $invoices = Invoice::whereIn('status', ['overdue'])->get();
+        return view('invoices.test-index', compact('invoices'));
+    }
 }

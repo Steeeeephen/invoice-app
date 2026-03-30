@@ -36,3 +36,9 @@ if(closeDeleteModal) {
     })
 }
 
+
+//
+document.querySelector('#invoice-status-select').addEventListener('change', function(){
+    console.log('changed')
+    window.location.href = '?status=' + this.value;
+})

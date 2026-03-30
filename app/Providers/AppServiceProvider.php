@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Console\Commands\MarkOverdueInvoices;
 use App\Models\Invoice;
 use App\Observers\InvoiceObserver;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +15,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
     }
 
     /**
@@ -21,5 +22,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+
     }
 }
