@@ -1,6 +1,10 @@
 <div>
-    <label for="invoice-status-select">Filter Status: </label>
-    <select name="invoice-status-select" id="invoice-status-select">
+    <label for="invoice-status-select" class="text-xl">Filter Status: </label>
+    <select
+        name="invoice-status-select"
+        id="invoice-status-select"
+        class="bg-slate-800 rounded px-2 py-1"
+    >
         <option value=""  selected>View All</option>
         <option value="draft" {{ request('status') === 'draft' ? 'selected' : '' }}>Draft</option>
         <option value="sent" {{ request('status') === 'sent' ? 'selected' : '' }}>Sent</option>

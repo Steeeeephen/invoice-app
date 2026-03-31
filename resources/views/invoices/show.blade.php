@@ -4,44 +4,49 @@
         <section
             class="flex justify-between items-center rounded-t-2xl bg-slate-700 p-2 shadow-md overflow-hidden"
         >
+            <div class="flex items-center gap-2">
             <h1 class="text-6xl font-bold text-gray-100">
                 {{ $invoice->invoice_number }}
             </h1>
 
-            <div class="flex gap-4 items-center">
-                @can("update", $invoice)
-                    <a
-                        href="{{ route("invoices.edit", $invoice->id) }}"
-                        class="bg-purple-900 font-bold rounded text-white hover:bg-purple-700 transition-all ease-in cursor-pointer px-4 py-2 w-32 text-center"
-                    >
-                        Edit
-                    </a>
-                @endcan
+            @can("update", $invoice)
+                <a
+                    href="{{ route("invoices.edit", $invoice->id) }}"
+                    class="bg-purple-900 font-bold rounded text-white hover:bg-purple-700 transition-all ease-in cursor-pointer px-3 py-2 w-32 text-center"
+                >
+                    Edit
+                </a>
+            @endcan
 
-                @can("send", $invoice)
-                    <form
-                        action="{{ route("invoices.send", $invoice) }}"
-                        method="POST"
+            @can("send", $invoice)
+                <form
+                    action="{{ route("invoices.send", $invoice) }}"
+                    method="POST"
+                >
+                    @csrf
+                    @method("PATCH")
+                    <button
+                        class="bg-green-700 font-bold rounded text-white hover:bg-green-500 hover:text-gray-900 transition-all ease-in cursor-pointer px-4 py-2 w-32 text-center"
+                        type="submit"
                     >
-                        @csrf
-                        @method("PATCH")
-                        <button
-                            class="bg-green-700 font-bold rounded text-white hover:bg-green-500 hover:text-gray-900 transition-all ease-in cursor-pointer px-4 py-2 w-32 text-center"
-                            type="submit"
-                        >
-                            SEND
-                        </button>
-                    </form>
-                @endcan
+                        SEND
+                    </button>
+                </form>
+            @endcan
+            </div>
+
+            <div class="flex gap-4 items-center">
+
 
                 <a href="{{ route('invoices.download', $invoice->id) }}"
-                   class="text-3xl"
+                   class="bg-blue-700 font-bold rounded text-white hover:bg-blue-500 hover:text-gray-900 transition-all ease-in cursor-pointer px-4 py-2 w-32 text-center"
+
                 >
                     Download
                 </a>
 
 
-                <h2 class="text-2xl">
+                <h2 class="text-2xl m-0">
                     Status:
                     <x-invoice-status :status="$invoice->status"/>
                 </h2>

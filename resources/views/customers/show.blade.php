@@ -51,14 +51,19 @@
                 </a>
             </div>
 
-            <div class="flex gap-5">
-                <h3 class="text-2xl">Open
-                    invoices: {{ $customer->invoices->whereIn('status', ['sent', 'partially_paid', 'overdue'])->count() }}</h3>
+            <div class="flex justify-between mt-4">
 
-                <h3 class="text-2xl">Total due: ${{ number_format($customer->invoices->sum('amount_due'), 2) }}</h3>
+                <div class="flex gap-2">
+                    <h3 class="text-2xl">Open
+                        invoices: {{ $customer->invoices->whereIn('status', ['sent', 'partially_paid', 'overdue'])->count() }}</h3>
+                    <h3 class="text-2xl">Total due: ${{ number_format($customer->invoices->sum('amount_due'), 2) }}</h3>
+                </div>
+
+                <x-invoice-filter></x-invoice-filter>
+
+
             </div>
 
-            <x-invoice-filter></x-invoice-filter>
 
 
             @if($customer->invoices->count())
