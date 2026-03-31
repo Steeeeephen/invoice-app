@@ -17,7 +17,15 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        $invoices = Invoice::orderBy('invoice_number', 'desc')->get();
+//        $invoices = Invoice::orderBy('invoice_number', 'desc')->get();
+        $status = request('status');
+        $query = Invoice::query();
+
+        if($status) {
+            $query->whereIn('status', [$status]);
+        }
+
+        $invoices = $query->orderBy('invoice_number', 'desc')->get();
         return view('invoices.index', compact('invoices'));
     }
 
@@ -122,7 +130,15 @@ class InvoiceController extends Controller
 
     // TEST INVOICE ROUTE
     public function invoiceTest() {
-        $invoices = Invoice::whereIn('status', ['overdue'])->get();
+        $status = request('status');
+        $query = Invoice::query();
+
+        if($status) {
+            $query->whereIn('status', [$status]);
+        }
+
+        $invoices = $query->get();
+
         return view('invoices.test-index', compact('invoices'));
     }
 }

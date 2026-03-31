@@ -5,19 +5,20 @@
         <div class="flex items-center gap-24">
             <h1 class="text-2xl font-bold mb-4  ">TEST - Invoice List</h1>
 
-            <div>
-                <label for="invoice-status-select">Filter Status: </label>
-                <select name="invoice-status-select" id="invoice-status-select">
-                    <option value="" disabled>Select</option>
-                    <option value="draft">Draft</option>
-                    <option value="sent">Sent</option>
-                    <option value="paid">Paid</option>
-                    <option value="partially-paid">Partially Paid</option>
-                    <option value="overdue">Overdue</option>
-                    <option value="cancelled">Cancelled</option>
-                </select>
-            </div>
+{{--            <div>--}}
+{{--                <label for="invoice-status-select">Filter Status: </label>--}}
+{{--                <select name="invoice-status-select" id="invoice-status-select">--}}
+{{--                    <option value=""  selected>View All</option>--}}
+{{--                    <option value="draft" {{ request('status') === 'draft' ? 'selected' : '' }}>Draft</option>--}}
+{{--                    <option value="sent" {{ request('status') === 'sent' ? 'selected' : '' }}>Sent</option>--}}
+{{--                    <option value="paid" {{ request('status') === 'paid' ? 'selected' : '' }}>Paid</option>--}}
+{{--                    <option value="partially-paid" {{ request('status') === 'partially-paid' ? 'selected' : '' }}>Partially Paid</option>--}}
+{{--                    <option value="overdue" {{ request('status') === 'overdue' ? 'selected' : '' }}>Overdue</option>--}}
+{{--                    <option value="cancelled {{ request('status') === 'cancelled' ? 'selected' : '' }}">Cancelled</option>--}}
+{{--                </select>--}}
+{{--            </div>--}}
 
+            <x-invoice-filter></x-invoice-filter>
 
 
         </div>

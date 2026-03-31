@@ -58,6 +58,8 @@
                 <h3 class="text-2xl">Total due: ${{ number_format($customer->invoices->sum('amount_due'), 2) }}</h3>
             </div>
 
+            <x-invoice-filter></x-invoice-filter>
+
 
             @if($customer->invoices->count())
                 <table

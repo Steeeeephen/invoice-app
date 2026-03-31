@@ -2,6 +2,7 @@
 
     <div class="flex flex-col container mx-auto px-6 py-6">
         <h1 class="text-2xl font-bold mb-4  ">Invoice List</h1>
+        <x-invoice-filter></x-invoice-filter>
 
 
         <table

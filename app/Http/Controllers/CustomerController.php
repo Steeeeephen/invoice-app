@@ -52,7 +52,15 @@ class CustomerController extends Controller
     {
         // Load related invoices and projects if not eager-loaded globally
         // More info on eager loading https://laravel.com/docs/12.x/eloquent-relationships#eager-loading
-        $customer->load(['invoices', 'projects']);
+        // I also added filtering based on invoice status.
+        // It looks like when adding filters to a model that is eager loaded, you do so by creating an anonymous function.
+        $customer->load(['invoices' => function ($query){
+            $status = request('status');
+
+            if($status){
+                $query->where('status', $status);
+            }
+        }]);
         return view('customers.show', compact('customer'));
     }
 
