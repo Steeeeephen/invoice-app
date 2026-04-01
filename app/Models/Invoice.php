@@ -38,13 +38,17 @@ class Invoice extends Model
 
         // Adding some logic here to sync invoice status depending on the amount_due column... hopefully this doesn't come back to haunt me...
         // Note: the order of these conditions is intentional.
-        // paid/cancelled must be checked before partially_paid to avoid conflicts.
+        // paid/canceled must be checked before partially_paid to avoid conflicts.
         static::updating(function ($invoice) {
-            // If the invoice status is either paid or cancelled, amount_due will go to 0.
+            // If the invoice status is either paid or canceled, amount_due will go to 0.
             // Also keeping in mind that status will not be changed by a dropdown menu,
             // invoice status will only be changed based on specific actions... payments, clicking cancel, etc...
             if (in_array($invoice->status, ['paid', 'cancelled'])) {
                 $invoice->amount_due = 0;
+            }
+
+            if($invoice->amount_due === 0.00){
+                $invoice->status = 'paid';
             }
 
             // When status is changed to paid, and if paid_at is empty, paid_at will be filled with a timestamp at the current time.
@@ -63,6 +67,10 @@ class Invoice extends Model
     // Helper function for checking draft status when attempting to edit.
     public function isDraft(): bool {
         return $this->status === 'draft';
+    }
+
+    public function isPayable(): bool {
+        return in_array($this->status, ['sent', 'partially_paid', 'overdue']);
     }
 
 

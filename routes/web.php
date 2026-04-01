@@ -16,8 +16,12 @@ Route::post('/logout', [HomeController::class, 'logout'])->name('logout');
 Route::middleware(['role:admin,super_admin'])->group(function () {
     Route::resource('customers', CustomerController::class);
     Route::resource('invoices', InvoiceController::class);
-    Route::patch('/invoices/{invoice}/send', [InvoiceController::class, 'send'])->name('invoices.send');
     Route::resource('projects', ProjectController::class);
+    // Payment Routes
+    Route::get('/invoices/{invoice}/payment-form', [InvoiceController::class, 'paymentForm'])->name('invoices.payment-form');
+    Route::post('/invoices/{invoice}/payment-form', [InvoiceController::class, 'processPayment'])->name('invoices.process-payment');
+    // Sending an invoice.
+    Route::patch('/invoices/{invoice}/send', [InvoiceController::class, 'send'])->name('invoices.send');
 });
 
 

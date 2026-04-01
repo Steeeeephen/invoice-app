@@ -67,4 +67,8 @@ class InvoicePolicy
     public function send(User $user, Invoice $invoice): bool {
         return $invoice->isDraft();
     }
+
+    public function pay(User $user, Invoice $invoice): bool {
+        return $invoice->isPayable();
+    }
 }

@@ -33,6 +33,11 @@
                     </button>
                 </form>
             @endcan
+
+                @can("pay", $invoice)
+                    <a href="{{ route('invoices.payment-form', $invoice) }}">Process Payment</a>
+                @endcan
+
             </div>
 
             <div class="flex gap-4 items-center">

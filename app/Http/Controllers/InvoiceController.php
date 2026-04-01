@@ -141,4 +141,21 @@ class InvoiceController extends Controller
 
         return view('invoices.test-index', compact('invoices'));
     }
+
+    public Function paymentForm(Invoice $invoice) {
+        if(!auth()->user()->can('pay', $invoice)) {
+            return redirect()->back()->with('error', 'You can not process payment on this invoice.');
+        }
+        return view('invoices.payment', compact('invoice'));
+    }
+
+    public function processPayment(Request $request, Invoice $invoice) {
+        $this->authorize('pay', $invoice);
+        $paymentAmount = request()->validate([
+            'payment_amount' => ['required', 'numeric', 'min:1', 'max:' . $invoice->amount_due],
+        ]);
+
+        $invoice->update(['amount_due' => $invoice->amount_due - $paymentAmount['payment_amount']]);
+        return redirect()->route('invoices.show', $invoice)->with('success', 'Invoice payment successful.');
+    }
 }
