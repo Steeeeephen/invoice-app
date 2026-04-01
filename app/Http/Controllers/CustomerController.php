@@ -35,10 +35,10 @@ class CustomerController extends Controller
             'company_name' => 'nullable|string|max:255',
             'email' => 'required|string|email|max:255|unique:customers',
             'phone' => 'nullable|string|max:255',
-            'street_address' => 'nullable|string|max:255',
-            'city' => 'nullable|string|max:255',
-            'state' => 'nullable|string|max:255',
-            'zip' => 'nullable|string|max:255',
+            'street_address' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
+            'state' => 'required|string|max:255',
+            'zip' => 'required|string|max:255',
         ]);
 
         Customer::create($incomingFields);
