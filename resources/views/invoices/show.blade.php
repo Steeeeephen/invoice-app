@@ -18,6 +18,7 @@
                 </a>
             @endcan
 
+            @can("send", $invoice)
                 <form
                     action="{{ route("invoices.send", $invoice) }}"
                     method="POST"
@@ -31,7 +32,7 @@
                         SEND
                     </button>
                 </form>
-            
+            @endcan
 
                 @can("pay", $invoice)
                     <a href="{{ route('invoices.payment-form', $invoice) }}"class="bg-green-700 font-bold rounded text-white hover:bg-green-500 hover:text-gray-900 transition-all ease-in cursor-pointer px-4 py-2 w-32 text-center"

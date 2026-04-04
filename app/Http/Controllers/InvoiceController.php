@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\InvoiceCreated;
 use App\Models\Customer;
 use App\Models\Invoice;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 
 /**
  * @method authorize(string $string, Invoice $invoice)
@@ -88,10 +86,7 @@ class InvoiceController extends Controller
      */
     public function edit(Invoice $invoice)
     {
-        if(!auth()->user()->can('update', $invoice)) {
-            return redirect()->back()->with('error', 'You cannot edit this invoice.');
-        }
-
+        $this->authorize('update', $invoice);
         $invoice->load(['customer', 'project']);
         return view('invoices.edit', compact('invoice'));
     }
@@ -102,12 +97,15 @@ class InvoiceController extends Controller
     public function update(Invoice $invoice, Request $request)
     {
         $this->authorize('update', $invoice);
+
         $incomingFields = $request->validate([
             'invoice_amount' => 'required|numeric|min:0',
             'description' => 'nullable|string|max:1000',
         ]);
 
+
         $incomingFields['amount_due'] = $incomingFields['invoice_amount'];
+
         $invoice->update($incomingFields);
 
         return redirect()
@@ -116,16 +114,8 @@ class InvoiceController extends Controller
     }
 
     public function send(Invoice $invoice) {
-//        $this->authorize('send', $invoice);
+        $this->authorize('send', $invoice);
         $invoice->update(['status' => 'sent']);
-
-        $pdf = Pdf::loadView('pdf.invoice', compact('invoice'));
-        $pdfData = $pdf->output(); // raw binary string
-
-        Mail::to($invoice->customer->email)->send(
-            new InvoiceCreated($invoice, $pdfData)
-        );
-
         return redirect()->route('invoices.show', $invoice)->with('success', 'Invoice sent.');
     }
 
@@ -135,6 +125,21 @@ class InvoiceController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+
+    // TEST INVOICE ROUTE
+    public function invoiceTest() {
+        $status = request('status');
+        $query = Invoice::query();
+
+        if($status) {
+            $query->whereIn('status', [$status]);
+        }
+
+        $invoices = $query->get();
+
+        return view('invoices.test-index', compact('invoices'));
     }
 
     public Function paymentForm(Invoice $invoice) {
