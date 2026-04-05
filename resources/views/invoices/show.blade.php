@@ -5,18 +5,18 @@
             class="flex justify-between items-center rounded-t-2xl bg-slate-700 p-2 shadow-md overflow-hidden"
         >
             <div class="flex items-center gap-2">
-            <h1 class="text-6xl font-bold text-gray-100">
-                {{ $invoice->invoice_number }}
-            </h1>
+                <h1 class="text-6xl font-bold text-gray-100">
+                    {{ $invoice->invoice_number }}
+                </h1>
 
-            @can("update", $invoice)
-                <a
-                    href="{{ route("invoices.edit", $invoice->id) }}"
-                    class="bg-purple-900 font-bold rounded text-white hover:bg-purple-700 transition-all ease-in cursor-pointer px-3 py-2 w-32 text-center"
-                >
-                    Edit
-                </a>
-            @endcan
+                @can("update", $invoice)
+                    <a
+                        href="{{ route("invoices.edit", $invoice->id) }}"
+                        class="bg-purple-900 font-bold rounded text-white hover:bg-purple-700 transition-all ease-in cursor-pointer px-3 py-2 w-32 text-center"
+                    >
+                        Edit
+                    </a>
+                @endcan
 
                 <form
                     action="{{ route("invoices.send", $invoice) }}"
@@ -31,10 +31,11 @@
                         SEND
                     </button>
                 </form>
-            
+
 
                 @can("pay", $invoice)
-                    <a href="{{ route('invoices.payment-form', $invoice) }}"class="bg-green-700 font-bold rounded text-white hover:bg-green-500 hover:text-gray-900 transition-all ease-in cursor-pointer px-4 py-2 w-32 text-center"
+                    <a href="{{ route('invoices.payment-form', $invoice) }}"
+                       class="bg-green-700 font-bold rounded text-white hover:bg-green-500 hover:text-gray-900 transition-all ease-in cursor-pointer px-4 py-2 w-32 text-center"
                     >Payment
                     </a>
                 @endcan
