@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ICM App</title>
+    <title>
+        @hasSection('title')
+            @yield('title') |
+        @endif
+        {{ $appTitle }}
+    </title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-slate-900 text-gray-100 min-h-screen flex flex-col">
@@ -46,11 +51,11 @@
                     </a>
                 </li>
 
-{{--                <li>--}}
-{{--                    <a href="{{ route('invoices.test.index') }}"  class="text-slate-300 hover:text-white font-medium transition-colors">--}}
-{{--                        Invoice Test--}}
-{{--                    </a>--}}
-{{--                </li>--}}
+                {{--                <li>--}}
+                {{--                    <a href="{{ route('invoices.test.index') }}"  class="text-slate-300 hover:text-white font-medium transition-colors">--}}
+                {{--                        Invoice Test--}}
+                {{--                    </a>--}}
+                {{--                </li>--}}
             </ul>
 
             <div class="flex items-center gap-4">

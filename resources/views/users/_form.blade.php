@@ -1,5 +1,9 @@
+@section('title')
+    {{ $title ?? 'Editing User' }}
+@endsection
+
 <h1 class="text-2xl font-bold mb-6 text-gray-100">
-    {{ $title }}
+    {{ $title ?? 'Editing User' }}
 </h1>
 
 <form action="{{ $action }}" method="POST" class="w-1/2">
@@ -100,57 +104,57 @@
         $roles = ["super_admin" => "Super Admin", "admin" => "Admin", "client" => "Client"];
     @endphp
 
-    @if($isOwnProfile)
-    {{--
+    {{--  To avoid an error on the create use page, this needs to check if isOwnProfile exists AND if it's true.  --}}
+    @if(isset($isOwnProfile) && $isOwnProfile)
+        {{--
 
-    The point of the $isOwnProfile check is that I don't want users to be able to change their own role, so if this evaluates
-    as true (this is passed from the controller and is true when the authenticated user's id matches the target user's id)
-    the user will only see their role, but won't be able to change it.
+        The point of the $isOwnProfile check is that I don't want users to be able to change their own role, so if this evaluates
+        as true (this is passed from the controller and is true when the authenticated user's id matches the target user's id)
+        the user will only see their role, but won't be able to change it.
 
-    Another thing to keep in mind, this template will be used for both Super Admins who will edit other users,
-    and it will be used as a profile view, so users can edit their own info.
+        Another thing to keep in mind, this template will be used for both Super Admins who will edit other users,
+        and it will be used as a profile view, so users can edit their own info.
 
-    The way it is set up now, is that users (even Super Admins) cannot change their own role. Instead if a user is editing
-    their own profile, they will see their assigned role, but it won't be displayed as a select input.
+        The way it is set up now, is that users (even Super Admins) cannot change their own role. Instead if a user is editing
+        their own profile, they will see their assigned role, but it won't be displayed as a select input.
 
-    --}}
+        --}}
         <h2 class="text-2xl">
             {{ $user->role }}
         </h2>
     @else
-
-    <div class="mb-4">
-        <label
-            for="role"
-            class="block text-sm font-semibold text-gray-400 uppercase tracking-wider mb-1"
-        >
-            User Role
-        </label>
-        <select
-            name="role"
-            id="role"
-            required
-            class="w-full rounded px-3 py-2 bg-slate-700 border border-slate-600 text-gray-100 placeholder-gray-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
-        >
-            <option
-                value=""
-                disabled
-                {{ old("role", $user->role ?? "") === "" ? "selected" : "" }}
+        <div class="mb-4">
+            <label
+                for="role"
+                class="block text-sm font-semibold text-gray-400 uppercase tracking-wider mb-1"
             >
-                -- Select Role --
-            </option>
-
-            @foreach ($roles as $value => $label)
+                User Role
+            </label>
+            <select
+                name="role"
+                id="role"
+                required
+                class="w-full rounded px-3 py-2 bg-slate-700 border border-slate-600 text-gray-100 placeholder-gray-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+            >
                 <option
-                    value="{{ $value }}"
-                    {{ old("role", $user->role ?? "") === $value ? "selected" : "" }}
+                    value=""
+                    disabled
+                    {{ old("role", $user->role ?? "") === "" ? "selected" : "" }}
                 >
-                    {{ $label }}
+                    -- Select Role --
                 </option>
-            @endforeach
-        </select>
-        <x-input-error name="role"></x-input-error>
-    </div>
+
+                @foreach ($roles as $value => $label)
+                    <option
+                        value="{{ $value }}"
+                        {{ old("role", $user->role ?? "") === $value ? "selected" : "" }}
+                    >
+                        {{ $label }}
+                    </option>
+                @endforeach
+            </select>
+            <x-input-error name="role"></x-input-error>
+        </div>
 
     @endif
 

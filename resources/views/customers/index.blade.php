@@ -1,5 +1,8 @@
-<x-layout>
+@section('title')
+    Customer List
+@endsection
 
+<x-layout>
     <div class="flex flex-col container mx-auto px-6 py-6">
         <section class="flex items-center mb-4 justify-between">
             <h1 class="text-2xl font-bold mb-4">Customer List</h1>

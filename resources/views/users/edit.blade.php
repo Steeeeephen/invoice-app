@@ -6,7 +6,7 @@
                 "action" => $formAction,
                 "method" => "PUT",
                 "buttonText" => "Update User",
-                "title" => "Editing User",
+
             ]
         )
     </div>

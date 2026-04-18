@@ -1,3 +1,7 @@
+@section('title')
+    Create a User
+@endsection
+
 <x-layout>
     <div class="flex justify-center items-center flex-col">
         @include(

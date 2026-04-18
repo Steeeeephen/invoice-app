@@ -1,3 +1,7 @@
+@section('title')
+    Creating an Invoice for {{$customer->first_name}} {{$customer->last_name}}
+@endsection
+
 <x-layout>
     <div class="flex justify-center items-center flex-col">
         @include(

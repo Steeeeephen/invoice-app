@@ -1,3 +1,7 @@
+@section('title')
+    {{ $invoice->invoice_number }}
+@endsection
+
 <x-layout>
     <div class="flex flex-col container mx-auto px-6 py-6">
         {{--      Invoice Header      --}}

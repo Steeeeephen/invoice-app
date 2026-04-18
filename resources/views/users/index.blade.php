@@ -1,5 +1,10 @@
 <x-layout>
 
+    @section('title')
+        User List
+    @endsection
+
+
     {{--  This is the fixed modal for the delete confirmation  --}}
     <div
         class="fixed w-full h-screen rounded-xl bg-black/80 top-0 left-0 flex justify-center items-center overflow-hidden hidden"
@@ -21,8 +26,9 @@
                     </button>
                 </form>
 
-                <button class="bg-zinc-50 border-red-600 text-black text-sm px-4 py-2 rounded hover:bg-zinc-200 mr-6 cursor-pointer"
-                        id="close-delete-modal">
+                <button
+                    class="bg-zinc-50 border-red-600 text-black text-sm px-4 py-2 rounded hover:bg-zinc-200 mr-6 cursor-pointer"
+                    id="close-delete-modal">
                     Cancel
                 </button>
             </div>

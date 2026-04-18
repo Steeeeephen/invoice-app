@@ -62,6 +62,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        $pageTitle = 'Editing User';
         $this->authorize('update', $user);
         return view('users.edit', compact('user'),
             // I'm using this property as a way to determine how a specific element is rendered in the blade template
@@ -76,6 +77,7 @@ class UserController extends Controller
             [
                 'isOwnProfile' => auth()->id() === $user->id,
                 'formAction' => route("users.update", $user),
+                'pageTitle' => $pageTitle,
 
                 ]);
     }
@@ -129,15 +131,19 @@ class UserController extends Controller
 
 
     public function editProfile(){
+        $title = 'Editing Profile';
+
         return view('users.edit', [
             'user' => auth()->user(),
             'isOwnProfile' => true,
             'formAction' => route('profile.update'),
+            'title' => $title,
         ]);
     }
 
     public function updateProfile(Request $request){
         $user = auth()->user();
+
         $incomingFields = $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
@@ -148,6 +154,8 @@ class UserController extends Controller
             ],
             'password' => 'nullable|confirmed',
         ]);
+
+
 
         if (!empty($incomingFields['password'])) {
             // If the password field is filled, the password will be hashed and updated.

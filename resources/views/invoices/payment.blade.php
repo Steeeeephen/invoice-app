@@ -1,3 +1,8 @@
+@section('title')
+    Processing payment for invoice: {{ $invoice->invoice_number }}
+
+@endsection
+
 <x-layout>
     <div class="flex  flex-col w-1/2 m-auto">
         <h1 class="text-2xl font-bold mb-6 text-gray-100">

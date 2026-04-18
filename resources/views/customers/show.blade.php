@@ -1,3 +1,7 @@
+@section('title')
+    {{ $customer->first_name . ' ' . $customer->last_name }}
+@endsection
+
 <x-layout>
     <div class="flex flex-col container mx-auto px-6 py-6">
         <div class="flex justify-between items-center">
@@ -63,7 +67,6 @@
 
 
             </div>
-
 
 
             @if($customer->invoices->count())

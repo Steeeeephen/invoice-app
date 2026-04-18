@@ -6,6 +6,7 @@ use App\Console\Commands\MarkOverdueInvoices;
 use App\Models\Invoice;
 use App\Observers\InvoiceObserver;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -22,6 +23,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        View::share('appTitle', 'ICM App');
 
     }
 }

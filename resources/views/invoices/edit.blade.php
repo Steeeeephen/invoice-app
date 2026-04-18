@@ -1,3 +1,7 @@
+@section('title')
+    Editing invoice {{$invoice->invoice_number}} for {{$invoice->customer->first_name}} {{$invoice->customer->last_name}}
+@endsection
+
 <x-layout>
     <div class="flex justify-center items-center flex-col">
         @include(
@@ -6,7 +10,7 @@
                 "action" => route("invoices.update", $invoice),
                 "method" => "PUT",
                 "buttonText" => "Update Invoice",
-                "title" => "Editing invoice '{$invoice->invoice_number}' for  {$invoice->customer->first_name} {$invoice->customer->last_name}",
+                "title" => "Editing invoice {$invoice->invoice_number} for  {$invoice->customer->first_name} {$invoice->customer->last_name}",
             ]
         )
     </div>
