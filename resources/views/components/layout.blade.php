@@ -45,17 +45,12 @@
                         Invoices
                     </a>
                 </li>
-                <li>
-                    <a href="#" class="text-slate-300 hover:text-white font-medium transition-colors">
-                        Projects
-                    </a>
-                </li>
 
-                {{--                <li>--}}
-                {{--                    <a href="{{ route('invoices.test.index') }}"  class="text-slate-300 hover:text-white font-medium transition-colors">--}}
-                {{--                        Invoice Test--}}
-                {{--                    </a>--}}
-                {{--                </li>--}}
+                {{--                                <li>--}}
+                {{--                                    <a href="{{ route('invoices.test.index') }}"  class="text-slate-300 hover:text-white font-medium transition-colors">--}}
+                {{--                                        Invoice Test--}}
+                {{--                                    </a>--}}
+                {{--                                </li>--}}
             </ul>
 
             <div class="flex items-center gap-4">
