@@ -2,10 +2,7 @@
 
 namespace App\Providers;
 
-use App\Console\Commands\MarkOverdueInvoices;
-use App\Models\Invoice;
-use App\Observers\InvoiceObserver;
-use Illuminate\Support\Facades\Artisan;
+
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 

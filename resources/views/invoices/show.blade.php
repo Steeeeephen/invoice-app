@@ -46,6 +46,9 @@
 
             </div>
 
+            <h3 class="text-3xl">Payment Due: {{ $invoice->due_date }}</h3>
+
+
             <div class="flex gap-4 items-center">
 
 
@@ -121,6 +124,7 @@
                         Invoice total:
                         ${{ number_format($invoice->invoice_amount, 2, ".", ",") }}
                     </h2>
+
                     <h2 class="text-4xl">
                         Amount due:
                         ${{ number_format($invoice->amount_due, 2, ".", ",") }}
