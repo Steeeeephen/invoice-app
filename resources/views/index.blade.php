@@ -48,6 +48,11 @@
                         Sign in
                     </button>
                 </form>
+
+                <div class="text-center mt-6 text-lg">To see more, please use the following login credentials:
+                    <div>Email: demo@superadmin.com</div>
+                    <div>Password: admin</div>
+                </div>
             </div>
         @endguest
 

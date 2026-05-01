@@ -72,6 +72,11 @@
     </div>
 </nav>
 
+<div class="text-center text-lg bg-amber-200/50 text-zinc-100 py-1">
+    Please note! This site is for demo purposes only and it's advised you do
+    not enter any sensitive information.
+</div>
+
 {{-- Flash Messages --}}
 @php
     $flashTypes = [
